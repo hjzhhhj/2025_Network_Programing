@@ -3,17 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3의 배수 확인하기</title>
+    <title>10 이상 40 미만인 숫자인지 아닌지 확인하기</title>
 </head>
 <body>
     <script>
         let num = prompt("숫자를 입력해주세요!");
-        if ( num % 3 === 0 ) {
-            document.write(num+"은 3의 배수입니다!")
-        }
-        else {
-            document.write(`${num}은 3의 배수가 아닙니다 ㅠㅠ`)
-        }
+        num >= 10 && num < 40 ? document.write(num+"은 10 이상, 40 미만입니다!") : document.write(num+"은 10 이상, 40 미만이 아닙니다.")
     </script>
 </body>
 </html>

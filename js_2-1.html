@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10이상 40미만인 숫자인지 아닌지 확인하기</title>
+</head>
+<body>
+    <script>
+        let num = prompt("숫자를 입력해주세요!")
+        let num1 = prompt("숫자를 입력해주세요!")
+
+        if ( num >= 10 && num < 40 ) {
+            document.write("첫번째 입력한 숫자만 조건 사항에 맞습니다.")
+        }
+
+        else if ( num1 >= 10 && num1 < 40 ) {
+            document.write("두번째 입력한 숫자만 조건 사항에 맞습니다.")
+        }
+
+        else if ( (num >= 10 && num < 40) && (num1 >= 10 && num1 < 40)) {
+            document.write("두 숫자 모두 조건 사항에 맞습니다!")
+        }
+
+        else {
+            document.write("두 숫자 모두 조건 사항에 맞지 않습니다.")
+        }
+    </script>
+</body>
+</html>
