@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch문 활용</title>
+</head>
+<body>
+    <script>
+        let qus = prompt("어떤 음료를 주문하시겠습니까? ( 1 : 커피, 2 : 에이드, 3 : 스무디 )")
+        let cof = 100;
+        let a = 200;
+        let s = 300;
+        switch ( qus ) {
+            case 1 : document.write(`커피 나왔습니다! ${cof}원 입니다~ 맛있게 드세요 ^.^`)
+            case 2 : document.write(`에이드 나왔습니다! ${a}원 입니다~ 맛있게 드세요 ^.^`)
+            case 3 : document.write(`스무디 나왔습니다! ${s}원 입니다~ 맛있게 드세요 ^.^`)
+            default : document.write("ㅈㅔㄷㅐ로 골라주세요")
+        }
+    </script>
+</body>
+</html>

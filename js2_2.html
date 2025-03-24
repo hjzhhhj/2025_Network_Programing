@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화살표 함수로 계산기 만들기</title>
+</head>
+<body>
+    <script>
+        const calculator = (a, b, op) => {
+            switch (op) {
+                case '+': return a + b;
+                case '-': return a - b;
+                case '*': return a * b;
+                case '/': return b !== 0 ? a / b : "0으로 나눌 수 없습니다.";
+                default: return "올바른 연산자가 아닙니다.";
+            }
+        };
+
+        console.log(calculator(10, 5, '+')); // 15
+        console.log(calculator(7, 2, '-'));  // 5
+        console.log(calculator(4, 3, '*'));  // 12
+        console.log(calculator(8, 2, '/'));  // 4
+        console.log(calculator(5, 0, '/'));  // "0으로 나눌 수 없습니다."
+    </script>
+</body>
+
+</html>

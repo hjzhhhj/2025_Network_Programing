@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="alert('버튼이 클릭되었씁니당!')">클릭하셔요!</button>
+
+    <ul>
+        <li onclick="showalert(this)">안녕하세요</li>
+        <li onclick="showalert(this)">반갑습니다</li>
+        <li onclick="showalert(this)">어섭쇼</li>
+    </ul>
+
+    <script>
+        function showalert(element) {
+            const content = element.textContent;
+            alert(content+' 을(를) 클릭했어요!')
+        }
+    </script>
+    <ul id="result">
+        <li onclick="ChangeBg('red')">Red</li>
+        <li onclick="ChangeBg('yellow')">Yellow</li>
+        <li onclick="ChangeBg('blue')">Blue</li>
+    </ul>
+    <script>
+        function ChangeBg(color){
+            const ulElement = document.querySelector("#result");
+            ulElement.style.backgroundColor = color;
+        }
+    </script>
+
+    <p id="counter">0</p>
+    <button onclick="up()">+</button>
+    <button onclick="down()">-</button>
+    <script>
+        let count = 0;
+        function up() {
+            count++;
+            document.getElementById("counter").innerText = count
+        }
+        function down() {
+            count--;
+            document.getElementById("counter").innerText = count
+        }
+    </script>
+
+    <br><br><br>
+    <button onclick="hideElement()">숨기기</button>
+    <button onclick="showElement()">보여주기</button>
+    <div id="box" style="width:100px; height: 100px; background-color: crimson;"></div>
+    <script>
+        function hideElement() {
+            document.getElementById("box").style.display = "none";
+        }
+        function showElement() {
+            document.getElementById("box").style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
