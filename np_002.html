@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 마우스를 올리면 텍스트 변경
+    <p id="hoverText" onmouseover="changeText()" onmouseout="changeText1()">여기에 마우스를 올려보세요!</p>
+    <script>
+        function changeText() {
+            document.getElementById("hoverText").innerText = "마우스를 올렸습니다!";
+        }
+        function changeText1() {
+            document.getElementById("hoverText").innerText = "마우스를 내렸습니다!";
+        }
+    </script> -->
+
+    <!-- 합치기! -->
+    <p id="hoverText" onmouseover="changeText(true)" onmouseout="changeText(false)">여기에 마우스를 올려보세요!</p>
+    <script>
+        function changeText(flag) {
+            if ( flag ) {
+                document.getElementById("hoverText").innerText = "마우스를 올렸습니다!";
+            } else {
+                document.getElementById("hoverText").innerText = "마우스를 내렸습니다!";
+            }
+        }
+    </script>
+    <img src="kkk.png" width="200" id="hoverImage" onmouseover="changeImg(true)" onmouseout="changeImg(false)">>
+    <script>
+        function changeImg(anton) {
+            if ( anton ) {
+                document.getElementById("hoverImage").src = "kkkk.png"
+            } else {
+                document.getElementById("hoverImage").src = "kkk.png"
+            }
+        }
+        </script>
+        <button onclick="changeRandomColor()">배경 색 변경</button>
+        <script>
+            function changeRandomColor() {
+                let colors = ["red", "yellow", "blue", "purple", "green"]
+                document.body.style.backgroundColor = colors[2]
+            }
+        </script>
+</body>
+</html>
