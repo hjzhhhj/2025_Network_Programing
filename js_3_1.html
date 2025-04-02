@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최댓값 찾기</title>
+</head>
+
+<body>
+    <input type="number" id="numInput">
+    <button onclick="addNumber()">추가</button>
+    <button onclick="findMax()">최댓값</button>
+    <p id="maxResult"></p>
+
+    <script>
+        let numbers = [];
+
+        function addNumber() {
+            let num = document.getElementById("numInput").value;
+            if (num !== "") {
+                numbers.push(Number(num));
+                console.log("배열 : ", numbers);
+            }
+        }
+
+        function findMax() {
+            let max = Math.max(...numbers);
+            document.getElementById("maxResult").innerText = "최댓값: " + max;
+        }
+    </script>
+</body>
+
+</html>

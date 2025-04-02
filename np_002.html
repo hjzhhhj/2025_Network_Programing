@@ -1,49 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: Pretendard;
+        }
+        li.done{
+            color: gray;
+            text-decoration: line-through;
+        }
+    </style>
 </head>
-<body>
-    <!-- 마우스를 올리면 텍스트 변경
-    <p id="hoverText" onmouseover="changeText()" onmouseout="changeText1()">여기에 마우스를 올려보세요!</p>
-    <script>
-        function changeText() {
-            document.getElementById("hoverText").innerText = "마우스를 올렸습니다!";
-        }
-        function changeText1() {
-            document.getElementById("hoverText").innerText = "마우스를 내렸습니다!";
-        }
-    </script> -->
 
-    <!-- 합치기! -->
+<body>
+    <!-- 마우스를 올리면 텍스트 변경 -->
     <p id="hoverText" onmouseover="changeText(true)" onmouseout="changeText(false)">여기에 마우스를 올려보세요!</p>
     <script>
         function changeText(flag) {
-            if ( flag ) {
+            if (flag) {
                 document.getElementById("hoverText").innerText = "마우스를 올렸습니다!";
             } else {
                 document.getElementById("hoverText").innerText = "마우스를 내렸습니다!";
             }
         }
     </script>
-    <img src="kkk.png" width="200" id="hoverImage" onmouseover="changeImg(true)" onmouseout="changeImg(false)">>
+
+    <img src="kkk.png" width="200" id="hoverImage" onmouseover="changeImg(true)" onmouseout="changeImg(false)">
     <script>
         function changeImg(anton) {
-            if ( anton ) {
-                document.getElementById("hoverImage").src = "kkkk.png"
+            if (anton) {
+                document.getElementById("hoverImage").src = "kkkk.png";
             } else {
-                document.getElementById("hoverImage").src = "kkk.png"
+                document.getElementById("hoverImage").src = "kkk.png";
             }
         }
-        </script>
-        <button onclick="changeRandomColor()">배경 색 변경</button>
-        <script>
-            function changeRandomColor() {
-                let colors = ["red", "yellow", "blue", "purple", "green"]
-                document.body.style.backgroundColor = colors[2]
+    </script>
+    <button onclick="changeRandomColor()">배경 색 변경</button>
+    <script>
+        function changeRandomColor() {
+            let colors = ["beige", "lightgreen", "navy", "darkgreen", "lightblue"];
+            let randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+
+        }
+    </script>
+
+    <!-- 마우스 이동 좌표 표시 -->
+    <p id="cur">마우스 이동</p>
+    <script>
+        document.addEventListener("mousemove", function (event) {
+            document.getElementById("cur").innerText =
+                `X : ${event.clientX}, Y : ${event.clientY}`;
+        })
+    </script>
+
+    <!-- 리스트 항목 더블 클릭 시 삭제 -->
+    <ul id="mylist">
+        <li ondblclick="removeItem(this)">찹쌀밥</li>
+        <li ondblclick="removeItem(this)">꽃떡국</li>
+        <li ondblclick="removeItem(this)">볼어묵볶음</li>
+        <li ondblclick="removeItem(this)">족발야채무침</li>
+        <li ondblclick="removeItem(this)">아망치샐러드</li>
+    </ul>
+    <script>
+        function removeItem(element) {
+            element.remove();
+        }
+    </script>
+
+    <!-- 사용자 입력값을 리스트에 추가 -->
+    <input type="text" id="userInput">
+
+    <button onclick="addToList()">추가</button>
+    <ul id="itemList">
+        <li class=.done>안녕하세요!</li>
+    </ul>
+    <script>
+        function addToList() {
+            let input = document.getElementById("userInput").value;
+            if (input.trim() !== "") {
+                let li = document.createElement("li");
+                li.innerText = input;
+                // li.setAttribute("onableclick", "removeItem(this)")
+                li.addEventListener("click", function(){
+                    // if(li.classList.contains("done")){
+                    //     li.classList.remove("done");
+                    // } else {
+                    //     li.classList.add("done")
+                    // }
+                    li.classList.toggle("done")
+                });
+                li.addEventListener("dblclick",function() { // 수정하기 우와 겁나신기함
+                    const newValue = prompt("수정할 내용을 입력하세요.")
+                 if ( newValue.trim() !== "" ) {
+                    li.innerText = newValue
+                 }
+                });
+                document.getElementById("itemList").appendChild(li)
+                // ul 자식 요소 넣기, 자식 2 요소 넣기 /ul
+
+                document.getElementById("userInput").value = "";
             }
-        </script>
+        }
+    </script>
 </body>
+
 </html>
