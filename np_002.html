@@ -84,7 +84,8 @@
             let input = document.getElementById("userInput").value;
             if (input.trim() !== "") {
                 let li = document.createElement("li");
-                li.innerText = input;
+                let span = document.createElement("span")
+                li.innerText = input; // <li>값</li>
                 // li.setAttribute("onableclick", "removeItem(this)")
                 li.addEventListener("click", function(){
                     // if(li.classList.contains("done")){
@@ -94,18 +95,37 @@
                     // }
                     li.classList.toggle("done")
                 });
-                li.addEventListener("dblclick",function() { // 수정하기 우와 겁나신기함
+                span.addEventListener("dblclick",function() { // 수정하기 우와 겁나신기함
                     const newValue = prompt("수정할 내용을 입력하세요.")
                  if ( newValue.trim() !== "" ) {
-                    li.innerText = newValue
+                    span.innerText = newValue
                  }
                 });
+                li.appendChild(span)
                 document.getElementById("itemList").appendChild(li)
                 // ul 자식 요소 넣기, 자식 2 요소 넣기 /ul
 
                 document.getElementById("userInput").value = "";
             }
         }
+        // 데이터 저장하기
+        localStorage.setItem("username", "정희진")
+
+        // 데이터 불러오기
+        const user = localStorage.getItem("username")
+        console.log(user)
+
+        const array = [];
+        const userInfo = { name : "지니지니", age : "100" };
+        console.log(userInfo)
+        console.log(userInfo, name)
+        console.log(userInfo, age)
+        // localStorage.setItem("user", JSON.stringify(userInfo))
+        console.log("JSON 값 : ",JSON.stringify(userInfo));
+
+        // 불러오기
+        const savedUser = JSON.parse(localStorage.getItem("user"));
+        console.log(savedUser.age)
     </script>
 </body>
 
