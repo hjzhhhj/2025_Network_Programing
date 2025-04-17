@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>방문 횟수 카운터</title>
+</head>
+<body>
+  <h1>방문 횟수 카운터</h1>
+  <h2>방문 횟수</h2>
+  <p id="visitCount"></p>
+
+  <script>
+    let count = localStorage.getItem('visitCount');
+    if (count) {
+      count = parseInt(count) + 1;
+    } else {
+      count = 1;
+    }
+
+    localStorage.setItem('visitCount', count);
+
+    document.getElementById('visitCount').innerText = `당신의 방문은 ${count}번째입니다!`;
+  </script>
+</body>
+</html>
