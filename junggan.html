@@ -7,19 +7,35 @@
 </head>
 <body>
     <script>
-        let hi = "123";
-        console.log(typeof hi)
-        let hi1;
-        console.log(hi1)
-        hi1 = 40
-        console.log(hi1)
+        // let hi = "123";
+        // console.log(typeof hi)
+        // let hi1;
+        // console.log(hi1)
+        // hi1 = 40
+        // console.log(hi1)
 
-        let input = prompt("숫자 입력")
-        console.log(input)
-        console.log(typeof input)
-        let input2 = input * 10
-        console.log(input2)
-        console.log(typeof input2)
+        // let input = prompt("숫자 입력")
+        // console.log(input)
+        // console.log(typeof input)
+        // console.log(typeof (input + 10))
+
+        function testScope() {
+            let i = 100;
+            for ( let i = 0; i < 3; i++ ) {
+                console.log(i);
+            }
+            console.log(i)
+        }
+        testScope();
+
+        function testScope1() {
+            let i = 100;
+            for ( i = 0; i < 3; i++ ) {
+                console.log(i);
+            }
+            console.log(i)
+        }
+        testScope1();
     </script>
 </body>
 </html>
