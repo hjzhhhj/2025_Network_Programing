@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>메모장</h2>
+    <textarea id="note" rows="5" cols="50"></textarea>
+
+    <script>
+        const textarea = document.getElementById("note");
+
+        // 1. 새로고침할 때 이전 메모가 있다면 불러오기
+        const savedNote = localStorage.getItem("myNote");
+        if (savedNote) {
+            textarea.value = savedNote;
+        }
+
+        // 2. 사용자가 글을 쓸 때마다 저장
+        textarea.addEventListener("input", function () {
+            localStorage.setItem("myNote", textarea.value);
+        });
+    </script>
+
+</body>
+
+</html>
