@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body> 
+    <h1>방문 횟수 카운터</h1>
+    <h2>방문 횟수</h2>
+    <p id="visitCount"></p>
+
+    <script>
+        const visitCount = document.getElementById("visitCount");
+
+        // 기존 카운트 불러오기 (없으면 0으로 시작)
+        let count = localStorage.getItem("visitcount");
+
+        if (count) {
+            count = parseInt(count); // 문자열 → 숫자
+            count += 1;
+        } else {
+            count = 1;
+        }
+
+        // localStorage에 저장
+        localStorage.setItem("visitcount", count);
+
+        // 화면에 표시
+        visitCount.innerText = count + "번 방문했어요!";
+    </script>
+
+</body>
+
+</html>
