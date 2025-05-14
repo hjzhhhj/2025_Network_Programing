@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>문자열 뒤집기</title>
+</head>
+
+<body>
+
+    <input type="text" id="wordInput" placeholder="문자열 입력">
+    <button onclick="reverseText()">뒤집기</button>
+    <p id="reversed"></p>
+
+    <script>
+        function reverseText() {
+            // 입력값 가져오기
+            const inputText = document.getElementById("wordInput").value;
+            const reversedText = inputText.split('').reverse().join('');
+
+            // split(''): 문자열을 한 글자씩 분리하여 배열로 만듦.
+            // reverse(): 배열을 뒤집음.
+            // join(''): 배열을 다시 문자열로 합침.
+
+            // 뒤집힌 문자열을 p 태그에 출력
+            document.getElementById("reversed").innerText = reversedText;
+        }
+    </script>
+
+</body>
+
+</html>
