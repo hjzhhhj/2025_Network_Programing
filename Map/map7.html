@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>다른 이미지로 마커 생성하기</title>
-    
 </head>
 <body>
 <div id="map" style="width:100%;height:350px;"></div>
