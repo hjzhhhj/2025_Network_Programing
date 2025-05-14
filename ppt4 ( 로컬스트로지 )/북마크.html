@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <!-- 사이트 이름과 주소를 입력할 input 요소 -->
+      <input type="text" id="siteName" placeholder="사이트 이름 입력"/>
+      <input type="text" id="siteURL" placeholder="사이트 주소 입력 (예: https://)"/>
+      <!-- 북마크 추가 버튼. 클릭 시 addBookmark 함수 실행 -->
+      <button onclick="addBookmark()">추가</button>
+    </div>
+
+    <h3>북마크 목록</h3>
+    <!-- 북마크 목록을 출력할 div -->
+    <div id="bookmarkList"></div>
+
+    <script>
+      // 북마크를 저장할 배열
+      let sites = [];
+
+      // localStorage에서 기존에 저장된 북마크 데이터를 불러옴
+      let saved = localStorage.getItem('sites');
+
+      // 저장된 데이터가 있다면 JSON 문자열을 실제 배열로 변환하여 사용
+      if (saved) {
+        sites = JSON.parse(saved); // 문자열 → 배열로 복원
+        showList(); // 북마크 목록을 화면에 표시
+      }
+
+      // [추가] 버튼을 클릭했을 때 실행되는 함수
+      function addBookmark() {
+        // 입력된 사이트 이름과 URL 값을 가져옴
+        let name = document.getElementById("siteName").value;
+        let url = document.getElementById("siteURL").value;
+
+        // 이름이나 주소가 비어있으면 경고 메시지를 띄우고 함수 종료
+        if (!name || !url) {
+          alert('사이트 이름과 주소를 모두 입력하세요');
+          return;
+        }
+
+        // URL이 http:// 또는 https:// 로 시작하지 않으면 자동으로 https:// 추가
+        if (!url.includes('http://') && !url.includes('https://')) {
+          url = 'https://' + url;
+        }
+
+        // 입력된 이름과 URL로 객체를 만들어 배열에 추가
+        let site = {name, url};
+        sites.push(site);
+
+        // 배열을 JSON 문자열로 변환하여 localStorage에 저장
+        localStorage.setItem('sites', JSON.stringify(sites));
+
+        // 화면에 북마크 목록 다시 출력
+        showList();
+      }
+
+      // 북마크 목록을 화면에 출력하는 함수
+      function showList() {
+        let list = document.getElementById("bookmarkList");
+
+        // 기존 목록 초기화 (기존에 있던 내용 제거)
+        list.innerHTML = '';
+
+        // 배열에 저장된 북마크를 하나씩 꺼내서 a 태그 형태로 추가
+        sites.forEach(i => {
+          list.innerHTML += `<a href="${i.url}" target="_blank" style="display: block;">${i.name}</a>`;
+
+          // input 입력창 초기화 (빈칸으로 되돌림)
+          document.getElementById("siteName").value = null;
+          document.getElementById("siteURL").value = null;
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<!--  사용자로부터 사이트 이름과 URL을 입력받아, 북마크로 저장하고, 아래에 링크 형태로 목록을 출력하는 프로그램을 작성하세요.
+사이트 이름과 사이트 주소(URL)를 입력받는 두 개의 <input> 요소를 사용
+[추가] 버튼을 클릭하면 입력값이 배열에 저장되며 새로고침을 해도 데이터 그대로
+배열에 저장된 북마크는 다음과 같은 형태로 화면에 보여야 합니다:
+<a href="https://example.com" target="_blank">예시 사이트</a>
+사용자가 아무것도 입력하지 않았거나, 둘 중 하나라도 비어 있으면 추가되지 않도록 예외처리
+URL이 http:// 또는 https://로 시작하지 않으면 자동으로 https://를 붙이기 (선택 조건) -->
