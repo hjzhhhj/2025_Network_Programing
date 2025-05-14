@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="numInput">
+    <button onclick="addNumber()">추가</button>
+    <button onclick="findMax()">최댓값</button>
+    <p id="maxResult"></p>
+    
+    <script>
+        let numbers = [];
+
+        function addNumber() {
+            // 입력된 값을 numInput에서 가져와서 정수로 변환
+            const num = parseInt(document.getElementById("numInput").value);
+
+            // 숫자가 제대로 입력되지 않으면 경고 메시지 출력
+            if (isNaN(num)) {
+                alert("숫자를 입력해주세요.");
+                return;
+            }
+
+            numbers.push(num);
+            
+            // 입력된 숫자 칸을 비움
+            document.getElementById("numInput").value = "";
+        }
+
+        function findMax() {
+            // 배열이 비어있다면 경고 메시지 출력
+            if (numbers.length === 0) {
+                document.getElementById("maxResult").innerText = "먼저 숫자를 추가해주세요.";
+                return;
+            }
+
+            // 배열에서 최댓값을 구함
+            const max = Math.max(...numbers);
+            // 여기에서! ...은 numbers 안에 있는 것을 모두 도는 겁니당!
+
+            // 최댓값을 화면에 출력
+            document.getElementById("maxResult").innerText = "최댓값: " + max;
+        }
+    </script>
+
+</body>
+</html>
