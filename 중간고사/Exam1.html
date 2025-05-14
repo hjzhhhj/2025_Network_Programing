@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript 학습 예제 통합</title>
+    <style>
+        li.done {
+            color: gray;
+            text-decoration: line-through;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: chocolate;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>JavaScript 학습 예제</h1>
+
+    <!-- 1. JS 첫 수업 콘솔 출력 및 테이블 -->
+    <h2>1. 콘솔 출력 및 테이블</h2>
+    <script>
+        alert("안녕하세요."); // 경고창 띄우기
+        let ans = confirm("확인과 취소"); // 확인창 (확인 true / 취소 false)
+        alert(ans); // 결과를 다시 알림창으로 출력
+
+        let ans2 = prompt("이름을 입력해주세요", "윤지"); // 이름 입력창
+        document.write("<h2>" + ans2 + "님, 안녕하세요</h2>");
+
+        // 콘솔 출력 예시
+        console.log("여기는 콘솔" + 5);
+        console.log("여기는 콘솔", 5);
+    </script>
+
+    <!-- 2. 다양한 이벤트 예제 -->
+    <h2>2. 클릭 및 마우스 관련 이벤트</h2>
+
+    <!-- 버튼 클릭 시 알림 표시 -->
+    <button onclick="alert('버튼이 클릭되었습니다!')">클릭하세요</button>
+
+    <!-- 리스트 클릭 시 메시지 출력 -->
+    <ul>
+        <li onclick="showAlert('안녕하세요')">안녕하세요.</li>
+        <li onclick="showAlert('반갑습니다')">반갑습니다.</li>
+        <li onclick="showAlert('다시만나요')">다시만나요.</li>
+    </ul>
+    <script>
+        // 클릭된 텍스트에 따라 알림 출력
+        function showAlert(msg) {
+            alert(`${msg} 버튼을 클릭했습니다!`);
+        }
+    </script>
+
+    <!-- 클릭 및 더블클릭 시 알림 출력 -->
+    <ul>
+        <li ondblclick="showAlert2(this)">오리</li>
+        <li onclick="showAlert2(this)">너구리</li>
+        <li onclick="showAlert2(this)">오리너구리</li>
+    </ul>
+    <script>
+        // 요소의 텍스트를 추출하여 알림 표시
+        function showAlert2(element) {
+            alert(`${element.textContent}를 클릭했습니다!`);
+        }
+    </script>
+
+    <!-- 배경색 변경 -->
+    <ul id="result">
+        <li onclick="changeBg('green')">Green</li>
+        <li onclick="changeBg('orange')">Orange</li>
+        <li onclick="changeBg('purple')">Purple</li>
+    </ul>
+    <script>
+        // ul의 배경색을 변경
+        function changeBg(color) {
+            document.querySelector("#result").style.backgroundColor = color;
+        }
+    </script>
+
+    <!-- 텍스트 기반 배경색 변경 -->
+    <ul id="result2" class="rClass">
+        <li onclick="changeBg2(this)">Green</li>
+        <li onclick="changeBg2(this)">Orange</li>
+        <li onclick="changeBg2(this)">Purple</li>
+    </ul>
+    <script>
+        // 클릭한 li의 텍스트를 이용해 배경색을 설정
+        function changeBg2(element) {
+            //document.querySelector("#result2").style.backgroundColor = element.textContent;
+            document.querySelector(".rClass").style.backgroundColor = element.textContent;
+        }
+    </script>
+
+    <!-- 숫자 증가, 감소, 초기화 -->
+    <p id="counter">0</p>
+    <button onclick="plus()">+</button>
+    <button onclick="minus()">-</button>
+    <button onclick="reset()">reset</button>
+    <script>
+        let count = 0;
+        function plus() {
+            count++;
+            document.getElementById("counter").innerText = count;
+        }
+        function minus() {
+            count--;
+            document.getElementById("counter").innerText = count;
+        }
+        function reset() {
+            count = 0;
+            document.getElementById("counter").innerText = count;
+        }
+    </script>
+
+    <!-- 요소 숨기기/보이기 -->
+    <button onclick="hideElement()">숨기기</button>
+    <button onclick="showElement()">나타내기</button>
+    <div id="box"></div>
+    <script>
+        // 요소 숨기기/보이기 기능
+        function hideElement() {
+            document.getElementById("box").style.display = "none";
+        }
+        function showElement() {
+            document.getElementById("box").style.display = "";
+        }
+    </script>
+
+    <!-- 마우스 올리면 텍스트 변경 -->
+    <p id="hoverText" onmouseover="changeText(true)" onmouseout="changeText(false)">
+        여기에 마우스를 올려보세요
+    </p>
+    <script>
+        // 마우스 올릴 때와 내릴 때 텍스트 변경
+        function changeText(flag) {
+            document.getElementById("hoverText").innerText = flag
+                ? "마우스를 올렸어요!"
+                : "마우스를 내렸어요!";
+        }
+    </script>
+
+    <!-- 마우스 올리면 이미지 변경 -->
+    <img id="hoverImage" src="img1.png" width="200" onmouseover="changeImage(true)" onmouseout="changeImage(false)">
+    <script>
+        // 이미지 전환 기능
+        function changeImage(flag) {
+            document.getElementById("hoverImage").src = flag ? "img2.png" : "img1.png";
+        }
+    </script>
+
+    <!-- 랜덤 배경색 변경 -->
+    <button onclick="changeRandomColor()">배경색 변경</button>
+    <script>
+        // 랜덤한 색상 중 하나를 선택하여 배경색 변경
+        function changeRandomColor() {
+            const colors = ["red", "blue", "green", "yellow", "purple", "pink"];
+            const randomcolor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomcolor;
+        }
+    </script>
+
+    <!-- 3. 입력값 변경 및 마우스 좌표 표시 -->
+    <h2>3. 입력 및 마우스 좌표 예제</h2>
+    <input type="text" oninput="alert('변경되었습니다.')">
+    <p id="coor">마우스를 움직여보세요.</p>
+    <script>
+        // 마우스 좌표 추적
+        document.addEventListener("mousemove", function (event) {
+            document.getElementById("coor").innerText = `X:${event.clientX} ,Y:${event.clientY}`;
+        });
+    </script>
+
+    <!-- 리스트 항목 더블 클릭 시 삭제 -->
+    <ul>
+        <li ondblclick="removeItem(this)">홍합탕</li>
+        <li ondblclick="removeItem(this)">버터갈릭치킨</li>
+        <li ondblclick="removeItem(this)">오징어볶음</li>
+        <li ondblclick="removeItem(this)">흑미밥</li>
+    </ul>
+    <script>
+        // 리스트 항목 삭제
+        function removeItem(element) {
+            element.remove();
+        }
+    </script>
+
+    <!-- 4. To-Do 리스트 예제 -->
+    <h2>4. To-Do 리스트 만들기</h2>
+    <input type="text" id="userInput">
+    <button onclick="addToList()">추가</button>
+    <ul id="itemList"></ul>
+    <script>
+        // 입력값을 리스트에 추가하고, 클릭 시 취소선 / 더블클릭 시 삭제
+        function addToList() {
+            const input = document.getElementById("userInput").value;
+            if (input.trim() !== "") {
+                const li = document.createElement("li");
+                li.innerText = input;
+                li.setAttribute("ondblclick", "removeItem(this)");
+                li.addEventListener("click", function () {
+                    li.classList.toggle("done");
+                });
+                document.getElementById("itemList").appendChild(li);
+                document.getElementById("userInput").value = "";
+            }
+        }
+    </script>
+
+
+    <script>
+        var x = 7;
+        function example1() {
+            var x = 1;
+            let y = 2;
+            const z = 3;
+
+            if (true) {
+                var x = 10;   // 함수 스코프 (기존 x 덮어쓰기)
+                let y = 20;   // 블록 스코프 (새 y)
+                const z = 30; // 블록 스코프 (새 z)
+
+                console.log("if문 내부:", x, y, z); // 10, 20, 30
+            }
+
+            console.log("if문 외부:", x, y, z);   // 10, 2, 3
+        }
+        console.log("외부:", x);
+        example1(); 
+    </script>
+
+    <script>
+        // forEach예제제
+        // 배열의 숫자를 제곱해서 출력
+        const numbers = [1, 2, 3, 4];
+        numbers.forEach(num => {
+            console.log("배열 제곱", num * num);
+        });
+        // 객체 배열에서 특정 키 출력
+        const users = [
+            { name: "짱구", age: 5 },
+            { name: "진구", age: 12 },
+        ];
+        let sumAge = 0;
+        users.forEach(user => {
+            sumAge += user.age;
+            console.log(`${user.name}의 나이는 ${user.age}살입니다.`);
+        });
+    </script>
+
+    <script>
+        // 예제 1: 요소 삭제
+        let colors = ["red", "green", "blue", "yellow"];
+        let colorsReturn = colors.splice(1, 1); // 인덱스 1부터 1개 삭제
+        console.log("colors : ", colors); // ["red", "blue", "yellow"]
+        console.log("colors : ", colorsReturn);
+
+        // 예제 2: 요소 삽입
+        let animals = ["dog", "cat", "rabbit"];
+        let animalsReturn = animals.splice(1, 0, "tiger"); // 인덱스 1에 삽입, 삭제 0
+        console.log("animals : ", animals); // ["dog", "tiger", "cat", "rabbit"]
+        console.log("animals : ", animalsReturn);
+
+        // 예제 3: 요소 교체
+        let nums = [1, 2, 3, 4];
+        let numsReturn = nums.splice(2, 1, 99); // 인덱스 2의 값 1개 삭제 후 99 삽입
+        console.log("nums : ", nums); // [1, 2, 99, 4]
+        console.log("nums : ", numsReturn);
+    </script>
+
+    <script>
+        // 예제 1: 배열에 값이 포함되어 있는지 확인
+        let pets = ["강아지", "고양이", "햄스터"];
+        console.log(pets.includes("고양이")); // true
+        console.log(pets.includes("토끼")); // false
+
+        // 예제 2: 조건에 따라 알림 표시
+        let blacklist = ["불량사용자1", "테스트계정"];
+        let username = "테스트계정2";
+        if (blacklist.includes(username)) {
+            console.log(`${username}는 접근이 제한된 사용자입니다.`);
+        }else{
+            console.log(`${username}는 접근이 허용된 사용자입니다.`);
+        }
+        // 예제 3: 대소문자 주의
+        let letters = ["A", "B", "C"];
+        console.log(letters.includes("a")); // false (대소문자 구분함)
+
+    </script>
+
+</body>
+
+</html>

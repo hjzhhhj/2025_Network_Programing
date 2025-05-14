@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Falsy & 타입 변환 퀴즈</title>
+</head>
+<body>
+  <h1>Falsy 값 & 느슨한 비교(==) 퀴즈</h1>
+  <p>아래 문제를 보고 개발자도구(F12)의 콘솔에서 정답과 해설을 확인하세요.</p>
+
+  <!-- 화면에 표시되는 문제 목록 -->
+  <h3>문제 1: "" == 0 의 결과는?</h3>
+  <h3>문제 2: null == undefined 의 결과는?</h3>
+  <h3>문제 3: false == "0" 의 결과는?</h3>
+  <h3>문제 4: [] == false 의 결과는?</h3>
+  <h3>문제 5: [] == ![] 의 결과는?</h3>
+  <h3>문제 6: null == 0 의 결과는?</h3>
+  <h3>문제 7: NaN == NaN 의 결과는?</h3>
+  <h3>문제 8: undefined == 0 의 결과는?</h3>
+  <h3>보너스: falsy 값은 어떤 것들이 있을까요?</h3>
+
+  <script>
+    console.log("🔎 문제 1: '' == 0 ?");
+    console.log("결과:", "" == 0); // true
+    console.log("해설: ''는 숫자 0으로 변환되고, 0 == 0 이므로 true");
+
+    console.log("\n🔎 문제 2: null == undefined ?");
+    console.log("결과:", null == undefined); // true
+    console.log("해설: == 느슨한 비교에서는 null과 undefined만 서로 같다고 인식합니다");
+
+    console.log("\n🔎 문제 3: false == '0' ?");
+    console.log("결과:", false == "0"); // true
+    console.log("해설: '0'은 숫자 0으로 변환 → false도 0 → 0 == 0 이므로 true");
+
+    console.log("\n🔎 문제 4: [] == false ?");
+    console.log("결과:", [] == false); // true
+    console.log("해설: []는 먼저 문자열 '' → 숫자 0으로 변환 → false도 0 → true");
+
+    console.log("\n🔎 문제 5: [] == ![] ?");
+    console.log("결과:", [] == ![]); // true
+    console.log("해설: ![] 는 false → 결국 [] == false → true");
+
+    console.log("\n🔎 문제 6: null == 0 ?");
+    console.log("결과:", null == 0); // false
+    console.log("해설: null은 오직 undefined 와만 == 비교에서 같음. 숫자와는 false");
+
+    console.log("\n🔎 문제 7: NaN == NaN ?");
+    console.log("결과:", NaN == NaN); // false
+    console.log("해설: NaN은 자기 자신과도 같지 않음. NaN === NaN 도 false");
+
+    console.log("\n🔎 문제 8: undefined == 0 ?");
+    console.log("결과:", undefined == 0); // false
+    console.log("해설: undefined는 숫자 0과 비교 불가 → false");
+
+    // 보너스: falsy 값 리스트 확인
+    const falsyValues = [false, 0, -0, 0n, "", null, undefined, NaN];
+    console.log("\n🎁 보너스 문제: 다음 값 중 falsy 값은?");
+    falsyValues.forEach((val, idx) => {
+      if (val) {
+        console.log(`❌ [${idx}]`, val, "→ truthy입니다.");
+      } else {
+        console.log(`✅ [${idx}]`, val, "→ falsy입니다.");
+      }
+    });
+    console.log("해설: 위 결과처럼 JavaScript에서는 총 8가지 값이 falsy로 평가됩니다.");
+  </script>
+</body>
+</html>
