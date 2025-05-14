@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 맞추기 게임</title>
+</head>
+<body>
+    <button id="startBtn" onclick="startGame()">게임 시작하기</button>
+
+    <script>
+        function startGame() {
+            let start = confirm("숫자 맞추기 게임에 오신 것을 환영합니다!\n1부터 100 사이의 숫자를 맞춰보세요.");
+            if (start == true) {
+                while (true) {
+                    let y = Math.floor(Math.random() * 100) + 1;
+                    let x = 10;
+
+                    while (x > 0) {
+                        let input = prompt("숫자를 맞춰주세요!");
+                        if (input === null) {
+                            alert("게임을 종료합니다.");
+                            return;
+                        }
+
+                        let answer = parseInt(input);
+
+                        if (isNaN(answer) || answer < 1 || answer > 100) {
+                            alert("1부터 100사이의 숫자를 입력해주세요");
+                            continue; // 기회 차감 안함
+                        }
+
+                        if (answer == y) {
+                            alert(`축하합니다. ${11 - x}번 만에 숫자를 맞추셨습니다.\n정답은 ${y}였습니다.`);
+                            break;
+                        } else if (answer > y) {
+                            alert("DOWN! 더 작은 숫자를 입력해보세요!");
+                        } else if (answer < y) {
+                            alert("UP! 더 큰 숫자를 입력해보세요!");
+                        }
+
+                        x--;
+                    }
+
+                    if (x == 0) {
+                        alert(`게임 오버!\n정답은 ${y}였습니다!`);
+                    }
+
+                    let b = confirm("다시 도전하겠습니까?");
+                    if (b == true) {
+                        continue;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
