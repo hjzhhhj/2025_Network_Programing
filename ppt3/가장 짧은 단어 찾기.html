@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="wordAdd">
+    <button onclick="addWord()">추가</button>
+    <button onclick="shortestWord()">최단 단어</button>
+    <p id="shortResult"></p>
+
+    <script>
+        let words = [];
+
+        function addWord() {
+            const num = document.getElementById("wordAdd").value;
+
+            words.push(num);
+
+            // 입력된 칸을 비움
+            document.getElementById("wordAdd").value = "";
+        }
+
+        function shortestWord() {
+            // 배열이 비어있다면 경고 메시지 출력
+            if (words.length === 0) {
+                document.getElementById("shortResult").innerText = "먼저 단어를 추가해주세요.";
+                return;
+            }
+
+            // 배열에서 길이의 최솟값을 구함
+            // 이 방법은 틀려용 = const shorter = Math.min(...words.length);
+
+            const lengths = words.map(word => word.length);       // 단어들의 길이 배열
+            const shorter = Math.min(...lengths);                // 최소 길이 찾기
+
+            // 이건 길이만 보임 = document.getElementById("shortResult").innerText = "최솟값: " + shorter;
+
+            const shortest = words.find(word => word.length === shorter);
+            document.getElementById("shortResult").innerText = "최단 단어: " + shortest;
+
+        }
+    </script>
+</body>
+
+</html>
