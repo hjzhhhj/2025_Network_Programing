@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <input type="text" id="siteName" placeholder="사이트 이름 입력"/>
+      <input type="text" id="siteURL" placeholder="사이트 주소 입력 (예: https://)"/>
+      <button onclick="addBookmark()">추가</button>
+    </div>
+
+    <h3>북마크 목록</h3>
+    <div id="bookmarkList"></div>
+    <script>
+      let sites = [];
+      let saved = localStorage.getItem('sites');
+      if (saved) {
+        sites = JSON.parse(saved);
+        showList();
+      }
+
+      function addBookmark() {
+        let name = document.getElementById("siteName").value;
+        let url = document.getElementById("siteURL").value;
+        if (!name || !url) {
+          alert('사이트 이름과 주소를 모두 입력하세요');
+          return;
+        }
+        if (!url.includes('http://') && !url.includes('https://')) {
+          url = 'https://' + url;
+        }
+        let site = {name, url};
+        sites.push(site);
+        localStorage.setItem('sites', JSON.stringify(sites));
+        showList();
+      }
+
+      function showList() {
+        let list = document.getElementById("bookmarkList");
+        list.innerHTML = '';
+        sites.forEach(i => {
+          list.innerHTML += `<a href="${i.url}" target="_blank" style="display: block;">${i.name}</a>`;
+          document.getElementById("siteName").value = null;
+          document.getElementById("siteURL").value = null;
+        })
+      }
+    </script>
+  </body>
+</html>

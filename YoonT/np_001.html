@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="alert('버튼이 클릭되었습니다!')">클릭하세요</button>
+
+    <ul>
+        <li onclick="showAlert(this)">안녕하세요</li>
+        <li onclick="showAlert(this)">반갑습니다</li>
+        <li onclick="showAlert(this)">다시만나요</li>
+    </ul>
+
+    <script>
+        function showAlert(element) {
+            // 다 showAlert을 호출해서 알림메시지 뜨게하기
+            // alert문장을 템플릿 리터럴로 바꾸기
+            const content = element.textContent;
+            alert(`${content} 을(를) 클릭했어요!!`);
+        }
+    </script>
+
+    <!-- 클릭한 항목에 따라 배경색 변경 -->
+    <ul id="result">
+        <li onclick="changeBg('green')">Green</li>
+        <li onclick="changeBg('orange')">Orange</li>
+        <li onclick="changeBg('purple')">Purple</li>
+    </ul>
+    <script>
+        function changeBg(color) {
+            const ulElement = document.querySelector("#result");
+            ulElement.style.backgroundColor = color;
+        }
+    </script>
+
+
+    <!-- 버튼 클릭시 숫자 증가 감소 -->
+    <p id="counter">0</p>
+    <button onclick="up()">+</button>
+    <button onclick="down()">-</button>
+    <!-- 감소만들기 -->
+    <script>
+        let count = 0;
+        function up() {
+            count++;
+            document.getElementById("counter").innerText = count;
+        }
+        function down() {
+            count--;
+            document.getElementById("counter").innerText = count;
+        }
+    </script>
+
+    <br><br><br>
+    <!-- 버튼 클릭했을때 요소 숨기기 -->
+    <button onclick="hideElement()">숨기기</button>
+    <button onclick="showElement()">나타내기</button>
+    <button onclick="toggleElement()">토글</button>
+    <div id="box" style="width:100px;height:100px; background-color: crimson;"></div>
+
+    <script>
+        function hideElement() {
+            document.getElementById("box").style.display = "none";
+            nowState = false;
+        }
+        function showElement() {
+            document.getElementById("box").style.display = "block";
+            nowState = true;
+        }
+        // 상자 나타내기 버튼 추가
+        // 숨기기 나타내기 둘 다 가능한 버튼 추가
+        let nowState = true;
+        function toggleElement() {
+            if(nowState){
+                hideElement();
+            }else{
+                showElement();
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

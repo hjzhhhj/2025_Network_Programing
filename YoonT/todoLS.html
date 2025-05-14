@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .input-group input {
+            flex: 1;
+        }
+
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #searchInput {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        li:hover {
+            background-color: #eef3f7;
+        }
+
+        li.done span {
+            color: gray;
+            text-decoration: line-through;
+        }
+
+        span {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        button.delete-btn {
+            background-color: transparent;
+            color: #ff5c5c;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button.delete-btn:hover {
+            color: #e60000;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- 사용자 입력값을 리스트에 추가 -->
+        <input type="text" id="userInput">
+        <button onclick="addToList()">추가</button>
+        <ul id="itemList"></ul>
+    </div>
+    <script>
+
+        const todoStr = localStorage.getItem("todo");
+        const todoObj = JSON.parse(todoStr);
+
+        let todoArray = todoObj ? todoObj : [];
+        // li를 그려보아요 
+        // 반복문 안써도 되니까 하나의 항목만이라도 그려보아요
+
+        loadAll();
+        function loadAll() {
+            document.getElementById("itemList").innerHTML = "";
+            todoArray.forEach((element,idx) => {
+                console.log(element.text);
+                let text = element.text;
+                let li = document.createElement("li"); // <li> </li>
+                let span = document.createElement("span");
+                li.dataset.index = idx;
+                span.innerText = text; //<li> 값 </li>
+
+                const deleteBtn = document.createElement("button"); //<button>삭제</button>
+                deleteBtn.innerText = "삭제";
+                deleteBtn.addEventListener("click", function () {
+                    //배열조작
+                    const resplice = todoArray.splice(li.dataset.index,1);
+                    console.log(li.dataset.index);
+                    console.log("삭제값: ",resplice);
+                    // 로컬스토리지
+                    localStorage.setItem("todo", JSON.stringify(todoArray));
+                    // 전체 다시그리기
+                    loadAll();
+                });
+                span.addEventListener("dblclick", function () {
+                    const newValue = prompt("수정할 내용을 입력하세요.");
+                    if (newValue.trim() !== "") {
+                        span.innerText = newValue;
+                    }
+                });
+
+                li.appendChild(span);
+                li.appendChild(deleteBtn);
+                document.getElementById("itemList").appendChild(li);
+            });
+        }
+
+        function validTodo(data) {
+            if (data.trim() === "") {
+                alert("값을 입력해주세요");
+                return false;
+            }
+            return true;
+        }
+
+
+        const input = document.getElementById("userInput");
+        input.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                addToList();
+            }
+        });
+
+        function addToList() {
+            let input = document.getElementById("userInput").value;
+            // 배열에 값 추가
+            const todoObj = { text: input, done: false };
+            todoArray.push(todoObj);
+            // 로컬스토리지
+            localStorage.setItem("todo", JSON.stringify(todoArray));
+            // 입력 필드 초기화
+            document.getElementById("userInput").value = "";
+            // 전체 다시그리기
+            loadAll();
+        }
+
+    </script>
+
+</body>
+
+</html>

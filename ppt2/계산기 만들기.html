@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <script>
+        const calculator = (x, y, op) => {
+            switch (op) {
+                case '+':
+                    return x + y;
+                case '-':
+                    return x - y;
+                case '*':
+                    return x * y;
+                case '/':
+                    if (y === 0) {
+                        return "0으로 나눌 수 없습니다.";
+                    }
+                    return x / y;
+                default:
+                    return "지원하지 않는 연산자입니다.";
+            }
+        }
+
+        console.log(calculator(10, 5, '+')); // 15
+        console.log(calculator(7, 2, '-'));  // 5
+        console.log(calculator(4, 3, '*'));  // 12
+        console.log(calculator(8, 2, '/'));  // 4
+        console.log(calculator(5, 0, '/'));  // "0으로 나눌 수 없습니다."
+    </script>
+</body>
+
+</html>

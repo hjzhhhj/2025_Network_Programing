@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li.done{
+            color:gray;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <!-- 마우스를 올리면 텍스트 변경 -->
+    <p id="hoverText" 
+            onmouseover="changeText(true)" onmouseout="changeText(false)" >여기에 마우스를 올려보세요.</p>
+    <script>
+        function changeText(flag){
+            if(flag){
+                document.getElementById("hoverText").innerText = "마우스를 올렸습니다!";
+            }else{
+                document.getElementById("hoverText").innerText = "마우스를 내렸습니다!";
+            }
+        }
+        //changeText 랑 changeText1 을 합쳐서 하나의 함수로 바꿔보세여~
+    </script>
+
+    <!-- 마우스를 올리면 이미지 변경 -->
+    <img src="img1.png" width="200" id="hoverImage"
+            onmouseover="changeImage(true)" onmouseout="changeImage(false)">
+    <script>
+        function changeImage(flag){
+            if(flag){
+                document.getElementById("hoverImage").src = "img2.png";
+            }else{
+                document.getElementById("hoverImage").src = "img1.png";
+            }
+        }
+    </script>
+    <div></div>
+    <!-- 버튼 클릭 시 배경색을 랜덤하게 변경 -->
+    <button onclick="changeRandomColor()">배경색변경</button>
+    <script>
+        function changeRandomColor(){
+            let colors = ["red","blue","green","yellow","pink"];
+            // 랜덤한 색상 선택
+            // Math.random() // 0부터 1사이의 값 
+            // * 배열의 방 크기
+            let randomColor = colors[ Math.floor( Math.random() * colors.length ) ];
+            //선택한 색상으로 배경색 변경 동혁이 바보
+            document.body.style.backgroundColor = randomColor;
+        }
+    </script>
+
+    <!-- 입력 값 변경 시 알림 표시 -->
+    <input type="text" oninput="alert('안녕?')">
+
+    <!-- 마우스 이동 좌표 표시 -->
+    <p id="cur">마우스 이동</p>
+    <script>
+        document.addEventListener("mousemove",function(event){
+            //현재 마우스의 좌표를 표시
+            document.getElementById("cur").innerText = 
+                                    `X : ${event.clientX},Y: ${event.clientY} `;
+        });
+    </script>
+
+    <!-- 리스트 항목 더블 클릭시 삭제 -->
+    <ul id="myList">
+        <li ondblclick="removeItem(this)">찹쌀밥</li>
+        <li ondblclick="removeItem(this)">꽃떡국??</li>
+        <li ondblclick="removeItem(this)">볼어묵볶음</li>
+        <li ondblclick="removeItem(this)">족발야채무침</li>
+        <li ondblclick="removeItem(this)">아망치샐러드</li>
+    </ul>
+    <script>
+        function removeItem(element){
+            element.remove();
+        }
+    </script>
+
+<br><br><br>
+    <!-- 사용자 입력값을 리스트에 추가 -->
+     <input type="text" id="userInput">
+     <button onclick="addToList()">추가</button>
+     <!-- <p class="done">안녕하세요.</p> -->
+     <ul id="itemList">
+        <!-- <li class="done">안녕하세요.</li> -->
+     </ul>
+     <script>
+            
+        const input = document.getElementById("userInput");
+        input.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                addToList();
+            }
+        });
+        function addToList(){
+            let input = document.getElementById("userInput").value;
+            if(input.trim() !== ""){
+                let li = document.createElement("li"); // <li> </li>
+                let span = document.createElement("span");
+                span.innerText = input; //<li> 값 </li>
+                //li.setAttribute("ondblclick","removeItem(this)");
+                li.addEventListener("click",function(){
+                    // if(li.classList.contains("done")){
+                    //     li.classList.remove("done");
+                    // }else{
+                    //     li.classList.add("done");
+                    // }
+                    li.classList.toggle("done")
+                });
+                span.addEventListener("dblclick",function(){
+                    const newValue = prompt("수정할 내용을 입력하세요.");
+                    if(newValue.trim() !== ""){
+                        span.innerText = newValue;
+                    }
+                });
+                // <ul>자식요소넣기,자식2요소넣기</ul>
+                li.appendChild(span);
+                document.getElementById("itemList").appendChild(li);
+
+                // 입력 필드 초기화
+                document.getElementById("userInput").value = ""; 
+            }
+        }
+        //데이터 저장
+        localStorage.setItem('username', "강재호박고구마");
+        //localStorage.removeItem("username")
+
+        //데이터 불러오기
+        const user = localStorage.getItem('username');
+        console.log(user); // 강재호박고구마
+
+        //alert("내가바로 강재호다 내 인스타 아이디는 wogh._16"); 
+
+        //JSON과 함께 사용하기
+        const array = [];
+        const userInfo = { name: '김윤지', age: 100 };
+        console.log(userInfo);
+        console.log(userInfo.name);
+        console.log(userInfo.age);
+        //localStorage.setItem('user', JSON.stringify(userInfo));
+        console.log("JSON 값 : ",JSON.stringify(userInfo));
+
+        // 불러오기
+        const savedUser = JSON.parse(localStorage.getItem('user'));
+        console.log(savedUser.age); // 
+
+
+     </script>
+
+</body>
+</html>
