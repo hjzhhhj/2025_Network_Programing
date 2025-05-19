@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function checkWindowSize() {
+            document.write("길이" + window.innerWidth)
+            if ( window.innerWidth < 600 ) {
+                alert("가로 길이가 600이 안되는군요")
+            }
+            else {
+                alert("가로 길이가 600이 넘는군요")
+            }
+        }
+
+        window,addEventListener("resize", checkWindowSize)
+    </script>
+</body>
+</html>
