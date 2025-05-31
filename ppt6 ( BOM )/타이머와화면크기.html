@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>알림 및 창 크기 확인</title>
+</head>
+<body>
+    <script>
+        function checkWindowSize() {
+            if (window.innerWidth < 500) {
+                alert("가로길이가 500이 안되는군요!");
+            } else {
+                alert("가로길이가 500이 넘는군요!");
+            }
+        }
+
+        window.addEventListener("resize", checkWindowSize);
+
+        setTimeout(() => {
+            alert("3초 후 실행된 알림입니다!");
+        }, 3000);
+    </script>
+</body>
+</html>
