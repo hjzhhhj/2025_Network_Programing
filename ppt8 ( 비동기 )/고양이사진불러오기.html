@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="allLoad()">이미지 불러오기</button><br>
+    <img id="cat-img" width="300" /><br>
+    <img id="dog-img" width="300" />
+    <script>
+        async function allLoad() {
+            const urls = [
+                "https://api.thecatapi.com/v1/images/search",
+                "https://api.thedogapi.com/v1/images/search"
+            ];
+
+            try {
+                const [catRes, dogRes] = await Promise.all(
+                    urls.map(url => fetch(url))
+                );
+
+                const [cat, dog] = await Promise.all([
+                    catRes.json(),
+                    dogRes.json()
+                ]);
+
+                console.log("cat:", cat);
+                console.log("dog:", dog);
+                document.getElementById("cat-img").src = cat[0].url;
+                document.getElementById("dog-img").src = dog[0].url;
+            } catch (error) {
+                console.error("하나 이상의 요청 실패:", error);
+            }
+        }
+    </script>
+</body>
+
+</html>

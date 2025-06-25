@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>동물 사진</title>
+</head>
+<body>
+
+  <button onclick="fetchImages('cat')">고양이 사진 보기</button>
+  <button onclick="fetchImages('dog')">강아지 사진 보기</button>
+  <br />
+  <img id="animalImage" src="" width="300" />
+
+  <script>
+    let imageUrls = [];
+    let currentIndex = 0;
+    let intervalId = null;
+
+    function fetchImages(type) {
+      if (intervalId) clearInterval(intervalId);
+
+      const url = type === 'cat'
+        ? 'https://api.thecatapi.com/v1/images/search?limit=10'
+        : 'https://api.thedogapi.com/v1/images/search?limit=10';
+
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          imageUrls = data.map(item => item.url);
+          currentIndex = 0;
+          showNextImage();
+          intervalId = setInterval(showNextImage, 1000);
+        });
+    }
+
+    function showNextImage() {
+      if (currentIndex < imageUrls.length) {
+        document.getElementById('animalImage').src = imageUrls[currentIndex];
+        currentIndex++;
+      } else {
+        clearInterval(intervalId);
+      }
+    }
+  </script>
+
+</body>
+</html>

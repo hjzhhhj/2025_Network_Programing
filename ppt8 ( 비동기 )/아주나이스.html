@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function fetchData2() {
+            try {
+                const reponse = await fetch("https://api.thecatapi.com/v1/images/search");
+                const data = await reponse.json();
+                console.log("데이터 : ", data);
+            } catch (error) {
+                console.log("에러 발생 : ", error)
+            }
+        }
+
+        fetchData2();
+    </script>
+</body>
+</html>

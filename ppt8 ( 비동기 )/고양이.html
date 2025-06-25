@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getCatImage()">고양이 사진 보기</button>
+    <img id="cat-img" src="" alt="고양이 사진" width="300" />
+    <script>
+        getCatImage();
+    function getCatImage() {
+        fetch('https://api.thecatapi.com/v1/image/search')
+        .then(reponse => reponse.json())
+        .then(data => {
+            console.log(data)
+            document.getElementById('cat-img').src = data[0].url;
+        })
+    }
+    </script>
+</body>
+</html>
