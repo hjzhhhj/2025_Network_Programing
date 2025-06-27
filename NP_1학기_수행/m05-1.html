@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>5. 카카오맵</title>
+</head>
+<body>
+	<div id="map" style="width:500px;height:400px;"></div>
+	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=886fa58730924d11e9929f7fc028301b"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.4996213, 126.5311884), // 제주시청
+			level: 3
+		};
+		var map = new kakao.maps.Map(container, options);
+
+		var places = [
+		    {title: '강남역', lat: 37.498095, lng: 127.02761},
+		    {title: '홍대입구역', lat: 37.557527, lng: 126.925394},
+		    {title: '명동역', lat: 37.563692, lng: 126.982593}
+		];
+
+		for (var i = 0; i < places.length; i++) {
+		    var marker = new kakao.maps.Marker({
+		        position: new kakao.maps.LatLng(places[i].lat, places[i].lng),
+		        map: map
+		    });
+
+		    var infowindow = new kakao.maps.InfoWindow({
+		        content: places[i].title
+		    });
+
+		    // 마우스 올리면 인포윈도우 표시
+		    kakao.maps.event.addListener(marker, 'mouseover', (function(marker, infowindow) {
+		        return function() {
+		            infowindow.open(map, marker);
+		        };
+		    })(marker, infowindow));
+
+		    // 마우스 나가면 인포윈도우 닫기
+		    kakao.maps.event.addListener(marker, 'mouseout', (function(infowindow) {
+		        return function() {
+		            infowindow.close();
+		        };
+		    })(infowindow));
+		}
+
+		// 클릭시 마커 추가
+		var clickCount = 0;
+		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+		    clickCount++;
+		    
+		    var marker = new kakao.maps.Marker({
+		        position: mouseEvent.latLng,
+		        map: map
+		    });
+		    
+		    var infowindow = new kakao.maps.InfoWindow({
+		        content: `${clickCount}번째 장소`
+		    });
+		    
+		    kakao.maps.event.addListener(marker, 'mouseover', function() {
+		        infowindow.open(map, marker);
+		    });
+		    
+		    kakao.maps.event.addListener(marker, 'mouseout', function() {
+		        infowindow.close();
+		    });
+		});
+	</script>
+</body>
+</html>

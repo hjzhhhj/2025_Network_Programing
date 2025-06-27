@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1. 배열 값 계산기</title>
+</head>
+<body>
+    <!-- 본문이 아닌 콘솔을 확인하세요. -->
+    <script>
+        function getArray(arr, operation) {
+            if (operation === "sum") {
+                let sum = 0;
+                for (let i = 0; i < arr.length; i++) {
+                    if (typeof arr[i] === 'number') {
+                        sum += arr[i];
+                    }
+                }
+                return sum;
+            }
+            
+            if (operation === "average") {
+                let sum = 0;
+                let count = 0;
+                for (let i = 0; i < arr.length; i++) {
+                    if (typeof arr[i] === 'number') {
+                        sum += arr[i];
+                        count++;
+                    }
+                }
+                return sum / count;
+            }
+            
+            if (operation === "len") {
+                return arr.length;
+            }
+            
+            // 기본값이나 잘못된 값은 length 반환
+            return arr.length;
+        }
+
+        // 1. 함수 만들기 - compareData
+        const compareData = (a, b, type = "max") => {
+            if (type === "equal") {
+                if (a === b) {
+                    return "같음";
+                } else {
+                    return "다름";
+                }
+            }
+            
+            if (type === "min" || type === "max") {
+                if (typeof a !== 'number' || typeof b !== 'number') {
+                    return "숫자 아님";
+                }
+                
+                if (type === "min") {
+                    if (a < b) {
+                        return a;
+                    } else {
+                        return b;
+                    }
+                }
+                
+                if (type === "max") {
+                    if (a > b) {
+                        return a;
+                    } else {
+                        return b;
+                    }
+                }
+            }
+            
+            return "타입오류";
+        };
+
+        console.log(getArray([1, 2, 3, 4, 5], "sum"));         // 15
+        console.log(getArray([1, 2, 3, "a", null], "sum"));    // 6
+        console.log(getArray([10, 20, 30], "average"));        // 20
+        console.log(getArray([1, 2, "b", 3, "4"], "len"));     // 4
+        console.log(getArray([1, 2, 3]));                      // 3
+        console.log(getArray([0, 1, 2, 3], "something"));      // 4
+        console.log(getArray(["a", "b"], "sum"));              // 0
+
+        console.log(compareData(10, 20)); // 20
+        console.log(compareData(10, 20, "min")); // 10
+        console.log(compareData(10, '20', "min")); // 숫자 아님
+        console.log(compareData(10, 20, "max")); // 20
+        console.log(compareData(10, 20, "equal")); // 다름
+        console.log(compareData(20, 20, "equal")); // 같음
+        console.log(compareData("a", "a", "equal")); // 같음
+        console.log(compareData("a", "b", "equal")); // 다름
+        console.log(compareData("a", 10, "min")); // 숫자 아님
+        console.log(compareData(10, "b", "max")); // 숫자 아님
+        console.log(compareData(10, 20, "tt")); // 타입오류
+    </script>
+</body>
+</html>

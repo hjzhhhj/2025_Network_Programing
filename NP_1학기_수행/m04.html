@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.로그인 로그아웃 기능</title>
+    <style>
+        .login {
+            background-color: #e0e0e0;
+        }
+        .liked {
+            background-color: #ff4757;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="textInput" placeholder="이름을 입력하세요">
+    <button onclick="login()">로그인</button>
+    <button onclick="logout()">로그아웃</button>
+    <div id="showMsg"></div>
+    
+    <br><br>
+    <button id="likeBtn" onclick="toggleLike()">좋아요</button>
+    <span id="likeCount">0</span>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const showMsg = document.getElementById('showMsg');
+        const likeBtn = document.getElementById('likeBtn');
+        const likeCount = document.getElementById('likeCount');
+        
+        let currentLikeCount = localStorage.getItem('likeCount') || 0;
+        likeCount.textContent = currentLikeCount;
+        
+        function login() {
+            let name = textInput.value;
+            if (name) {
+                document.body.classList.add('login');
+                showMsg.textContent = `${name}님 환영합니다!`;
+            }
+        }
+        
+        function logout() {
+            document.body.classList.remove('login');
+            showMsg.textContent = '';
+            textInput.value = '';
+        }
+        
+        function toggleLike() {
+            if (likeBtn.classList.contains('liked')) {
+                currentLikeCount--;
+                likeBtn.classList.remove('liked');
+            } else {
+                currentLikeCount++;
+                likeBtn.classList.add('liked');
+            }
+            
+            likeCount.textContent = currentLikeCount;
+            localStorage.setItem('likeCount', currentLikeCount);
+        }
+    </script>
+</body>
+</html>

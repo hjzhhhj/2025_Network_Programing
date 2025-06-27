@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>2. 더하기 퀴즈 게임</title>
+</head>
+<body>
+    <div>퀴즈를 시작하려면 버튼을 눌러주세요.</div>
+    <div id="resultMsg"></div>
+    <button id="startQuizBtn">퀴즈 시작</button>
+
+    <script>
+        document.getElementById('startQuizBtn').onclick = startQuiz;
+
+        function startQuiz() {
+            let score = 0;
+            
+            for (let i = 1; i <= 5; i++) {
+                let num1 = Math.floor(Math.random() * 8) + 2; 
+                let num2 = Math.floor(Math.random() * 8) + 2; 
+                let answer = num1 * num2;
+                
+                let userAnswer = prompt(`${i}번 문제: ${num1} * ${num2} = ?`);
+                
+                if (isNaN(userAnswer)) {
+                    alert("숫자를 입력해주세요");
+                } else if (Number(userAnswer) === answer) {
+                    alert("정답!");
+                    score++;
+                } else {
+                    alert(`오답! 정답은 ${answer}입니다.`);
+                }
+            }
+            
+            document.getElementById('resultMsg').innerHTML = `퀴즈 종료! 5문제중 ${score}문제 맞췄습니다.`;
+        }
+    </script>
+</body>
+</html>

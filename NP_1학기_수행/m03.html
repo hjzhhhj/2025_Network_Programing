@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>3. 점수 증감 시스템</title>
+    <style>
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .high {
+            color: blue;
+        }
+        .low {
+            color: red;
+        }
+        .normal {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span id="score">50</span>
+        <button onclick="changeScore(-1)">-</button>
+        <button onclick="changeScore(1)">+</button>
+    </div>
+    
+    <textarea id="textArea"></textarea>
+    <div id="countMsg">0자 : 현재 0자 입력 중</div>
+
+    <script>
+        let currentScore = 50;
+        
+        function changeScore(change) {
+            currentScore += change;
+            let scoreElement = document.getElementById('score');
+            scoreElement.textContent = currentScore;
+            
+            scoreElement.className = '';
+            if (currentScore >= 80) {
+                scoreElement.classList.add('high');
+            } else if (currentScore <= 30) {
+                scoreElement.classList.add('low');
+            } else {
+                scoreElement.classList.add('normal');
+            }
+        }
+        
+        document.getElementById('textArea').oninput = function() {
+            let text = this.value;
+            let length = text.length;
+            let countMsg = document.getElementById('countMsg');
+            
+            if (length > 20) {
+                countMsg.textContent = `${length}자 : 최대 글자 수를 초과`;
+                countMsg.style.color = 'red';
+            } else {
+                countMsg.textContent = `${length}자 : 현재 ${length}자 입력 중`;
+                countMsg.style.color = 'black';
+            }
+            
+            // 로컬스트로지!
+            localStorage.setItem('savedText', text);
+            localStorage.setItem('savedLength', length);
+            localStorage.setItem('savedColor', countMsg.style.color);
+        };
+        
+        window.onload = function() {
+            let savedText = localStorage.getItem('savedText') || '';
+            let savedLength = localStorage.getItem('savedLength') || 0;
+            let savedColor = localStorage.getItem('savedColor') || 'black';
+            
+            document.getElementById('textArea').value = savedText;
+            let countMsg = document.getElementById('countMsg');
+            
+            if (savedLength > 20) {
+                countMsg.textContent = `${savedLength}자 : 최대 글자 수를 초과`;
+            } else {
+                countMsg.textContent = `${savedLength}자 : 현재 ${savedLength}자 입력 중`;
+            }
+            countMsg.style.color = savedColor;
+        };
+    </script>
+</body>
+</html>

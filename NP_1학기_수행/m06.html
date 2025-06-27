@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색어 저장</title>
+    <style>
+        #searchHistory div {
+            margin: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color:lightskyblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" id="textInput" placeholder="검색어를 입력하세요">
+        <button id="searchBtn">검색</button>
+    </div>
+    <div id="searchHistory"></div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchHistory = document.getElementById('searchHistory');
+
+        searchBtn.onclick = function() {
+            let searchText = textInput.value;
+            if (searchText) {
+                let newDiv = document.createElement('div');
+                newDiv.textContent = searchText;
+                searchHistory.appendChild(newDiv);
+                
+                // 새로고침 후에도 유지
+                let saved = localStorage.getItem('searches') || '';
+                localStorage.setItem('searches', saved + searchText + '|');
+                
+                textInput.value = '';
+            }
+        };
+        
+        window.onload = function() {
+            let saved = localStorage.getItem('searches') || '';
+            if (saved) {
+                let searches = saved.split('|');
+                for (let i = 0; i < searches.length - 1; i++) {
+                    let div = document.createElement('div');
+                    div.textContent = searches[i];
+                    searchHistory.appendChild(div);
+                }
+            }
+        };
+    </script>
+</body>
+</html>
