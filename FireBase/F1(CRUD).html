@@ -4,10 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>파이어베이스 CRUD</title>
 </head>
 
 <body>
+    <h1>파이어베이스 CRUD</h1>
+
+    <form id="addForm">
+        <input type="text" id="itemInput" placeholder="입력해주세요">
+        <button type="submit">추가</button>
+    </form>
+
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
@@ -42,6 +49,27 @@
             state: "CA",
             country: "USA"
         });
+
+        await setDoc(doc(db, "cities", "LA2"), {
+            name: "Los Angeles",
+            state: "CA",
+            country: "USA"
+        });
+
+        await setDoc(doc(db, "cities", "LA3"), {
+            name: "Los Angeles",
+            state: "CA",
+            country: "USA"
+        });
+
+        // create
+        const addForm = document.getElementById("addForm");
+        const itemInput = document.getElementById("itemInput");
+        
+        addForm.addEventListener("submit", async (event) => {
+            event.preventDefault(); // 이벤트 막기
+            const item = itemInput.value;
+        })
     </script>
 </body>
 
